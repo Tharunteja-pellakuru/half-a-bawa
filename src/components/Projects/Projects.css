@@ -1,0 +1,305 @@
+/* ==========================================================================
+   Projects Launched Section Component — Half a Bawa
+   ========================================================================== */
+
+.projects-section {
+  width: 100%;
+  background-color: #ffffff;
+  padding: 5.5rem 0 6.5rem;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.projects-container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 3.5rem; /* Aligned with Header container */
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 3.5rem;
+  align-items: stretch;
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   Left Column: Intro & Navigation
+   -------------------------------------------------------------------------- */
+.projects-intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2.5rem;
+  box-sizing: border-box;
+}
+
+.projects-intro-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.projects-title {
+  font-family: var(--font-serif, 'Fraunces', Georgia, serif);
+  font-size: clamp(2.4rem, 3.4vw, 3.2rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: #121316;
+  margin: 0;
+}
+
+.projects-description {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  font-size: 1.08rem;
+  line-height: 1.7;
+  color: #2b2e35;
+  font-weight: 500;
+  margin: 0;
+}
+
+.projects-nav-arrows {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding-top: 2.5rem;
+}
+
+.projects-arrow-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.projects-arrow-btn.prev-arrow {
+  background-color: #f2f3f5;
+  color: #121316;
+}
+
+.projects-arrow-btn.prev-arrow:hover:not(:disabled) {
+  background-color: #e4e6ea;
+  transform: scale(1.08);
+}
+
+.projects-arrow-btn.next-arrow {
+  background-color: #121316;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(18, 19, 22, 0.2);
+}
+
+.projects-arrow-btn.next-arrow:hover:not(:disabled) {
+  background-color: #2b303c;
+  transform: scale(1.08);
+  box-shadow: 0 8px 20px rgba(18, 19, 22, 0.28);
+}
+
+.projects-arrow-btn:disabled,
+.projects-arrow-btn.is-disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   Right Column: Horizontal Slider
+   -------------------------------------------------------------------------- */
+.projects-slider-wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.projects-slider {
+  display: flex;
+  gap: 1.6rem;
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+  padding-bottom: 0.5rem;
+  will-change: scroll-position;
+}
+
+.projects-slider::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Webkit */
+}
+
+/* --------------------------------------------------------------------------
+   Project Card
+   -------------------------------------------------------------------------- */
+.project-card {
+  flex: 0 0 440px;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.project-card-media {
+  position: relative;
+  width: 100%;
+  height: 290px;
+  border-radius: 24px;
+  overflow: hidden;
+  background-color: #1a1e24;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+}
+
+.projects-section.is-visible .project-card-media {
+  animation: projectImageWipe 0.85s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms) both;
+}
+
+@keyframes projectImageWipe {
+  from { clip-path: inset(100% 0 0); }
+  to { clip-path: inset(0 0 0); }
+}
+
+.project-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover .project-card-image {
+  transform: scale(1.06);
+}
+
+/* Card Footer */
+.project-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.15rem 0.25rem 0;
+  gap: 1rem;
+}
+
+.project-card-title {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #121316;
+  margin: 0;
+  letter-spacing: -0.01em;
+  transition: color 0.2s ease;
+}
+
+.project-card:hover .project-card-title {
+  color: #b87a28;
+}
+
+.project-card-action {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  border-radius: 50%;
+  background-color: #f5efe6;
+  color: #121316;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-diagonal-arrow {
+  font-size: 1.15rem;
+  line-height: 1;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover .project-card-action {
+  background-color: #121316;
+  color: #ffffff;
+  transform: scale(1.08);
+}
+
+.project-card:hover .project-diagonal-arrow {
+  transform: translate(2px, -2px);
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Layout
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .projects-section {
+    padding: 4.5rem 0 5rem;
+  }
+
+  .projects-container {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding: 0 2rem;
+  }
+
+  .projects-intro {
+    min-height: auto;
+  }
+
+  .projects-title {
+    font-size: 2.3rem;
+  }
+
+  .projects-description {
+    font-size: 1.05rem;
+  }
+
+  .projects-nav-arrows {
+    padding-top: 1.5rem;
+  }
+
+  .project-card {
+    flex: 0 0 380px;
+  }
+
+  .project-card-media {
+    height: 250px;
+  }
+}
+
+@media (max-width: 640px) {
+  .projects-section {
+    padding: 3.5rem 0 4rem;
+  }
+
+  .projects-container {
+    padding: 0 1.25rem;
+    gap: 2rem;
+  }
+
+  .projects-title {
+    font-size: 1.95rem;
+  }
+
+  .projects-description {
+    font-size: 0.98rem;
+    line-height: 1.65;
+  }
+
+  .project-card {
+    flex: 0 0 300px;
+  }
+
+  .project-card-media {
+    height: 200px;
+    border-radius: 18px;
+  }
+
+  .project-card-title {
+    font-size: 1.02rem;
+  }
+
+  .project-card-action {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+  }
+}

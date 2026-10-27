@@ -1,0 +1,400 @@
+/* ==========================================================================
+   Header Component Styling — Half a Bawa
+   ========================================================================== */
+
+.hab-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: #ffffff;
+  border-bottom: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.hab-header-scrolled {
+  background-color: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.hab-header-container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 1rem 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  animation: headerGrowIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes headerGrowIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Logo — Growing Effect on Hover
+   -------------------------------------------------------------------------- */
+.hab-logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+  perspective: 1000px;
+}
+
+.hab-logo {
+  height: 52px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  transform-origin: left center;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+  will-change: transform;
+}
+
+/* Growing effect on Logo hover */
+.hab-logo-link:hover .hab-logo {
+  transform: scale(1.08);
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.08));
+}
+
+/* --------------------------------------------------------------------------
+   Desktop Navigation Links — Masked Line Reveal Effect
+   -------------------------------------------------------------------------- */
+.hab-nav {
+  display: flex;
+  align-items: center;
+  gap: 2.75rem;
+}
+
+.hab-nav-link {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #2b2e35;
+  text-decoration: none;
+  position: relative;
+  padding: 6px 4px;
+  display: inline-block;
+  letter-spacing: -0.01em;
+  transition: color 0.25s ease;
+}
+
+.hab-nav-link:hover {
+  color: #000000;
+}
+
+/* Mask Clipping Boundary: Masks and hides overflowing text */
+.hab-mask-wrap {
+  display: inline-block;
+  overflow: hidden;
+  height: 1.35em;
+  line-height: 1.35em;
+  vertical-align: middle;
+}
+
+/* Inner rolling text container */
+.hab-mask-inner {
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 1.35em;
+  transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+/* The duplicate text line that rolls in from behind the mask */
+.hab-mask-inner::after {
+  content: attr(data-text);
+  display: block;
+  font-weight: 600;
+  color: #000000;
+}
+
+/* On hover: The line rolls up behind the top mask */
+.hab-nav-link:hover .hab-mask-inner {
+  transform: translateY(-50%);
+}
+
+.hab-mobile-link:hover .hab-mask-inner {
+  transform: translateY(-50%);
+}
+
+/* Action button masked roll */
+.hab-talk-pill .hab-mask-inner::after {
+  content: attr(data-text);
+  display: block;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.hab-talk-btn-group:hover .hab-talk-pill .hab-mask-inner {
+  transform: translateY(-50%);
+}
+
+/* Growing animated underline expanding from center */
+.hab-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #121316;
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hab-nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Staggered Entrance Animation: Masked line reveal on page load */
+.hab-nav-link:nth-child(1) .hab-mask-wrap { animation: maskedLineReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both; }
+.hab-nav-link:nth-child(2) .hab-mask-wrap { animation: maskedLineReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.16s both; }
+.hab-nav-link:nth-child(3) .hab-mask-wrap { animation: maskedLineReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.24s both; }
+.hab-nav-link:nth-child(4) .hab-mask-wrap { animation: maskedLineReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.32s both; }
+.hab-nav-link:nth-child(5) .hab-mask-wrap { animation: maskedLineReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.40s both; }
+.hab-talk-btn-group .hab-mask-wrap        { animation: maskedLineReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.48s both; }
+
+@keyframes maskedLineReveal {
+  from {
+    transform: translateY(115%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Action Button: Let's Talk. — Pill + Circle Merging Button
+   -------------------------------------------------------------------------- */
+.hab-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.hab-talk-btn-group {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  height: 42px;
+  background-color: transparent;
+  border-radius: 9999px;
+  transition: background-color 0.28s ease, box-shadow 0.28s ease;
+}
+
+/* Left Pill Capsule */
+.hab-talk-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  padding: 0 0.45rem 0 1.4rem;
+  background-color: #121316;
+  color: #ffffff;
+  border-radius: 21px 4px 4px 21px;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(18, 19, 22, 0.12);
+  transition: box-shadow 0.28s ease;
+  user-select: none;
+  overflow: hidden;
+  z-index: 2;
+}
+
+/* Right Circular Arrow Button */
+.hab-talk-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  margin-left: 4px;
+  background-color: #121316;
+  color: #ffffff;
+  border-radius: 4px 21px 21px 4px;
+  box-shadow: 0 2px 8px rgba(18, 19, 22, 0.12);
+  transition: box-shadow 0.28s ease;
+  z-index: 2;
+}
+
+.hab-talk-arrow {
+  display: block;
+  transform: rotate(0deg);
+  transform-origin: center;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hab-talk-btn-group:hover {
+  background-color: #121316;
+}
+
+.hab-talk-btn-group:hover .hab-talk-arrow {
+  transform: rotate(45deg);
+}
+
+/* --------------------------------------------------------------------------
+   Mobile Hamburger Toggle Button — Growing Effect
+   -------------------------------------------------------------------------- */
+.hab-mobile-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 38px;
+  height: 38px;
+  background: none;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.2s;
+  will-change: transform;
+}
+
+.hab-mobile-toggle:hover {
+  border-color: #121316;
+  transform: scale(1.1);
+}
+
+.hab-toggle-bar {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #121316;
+  border-radius: 2px;
+  transition: all 0.25s ease;
+}
+
+.hab-mobile-toggle.is-open .hab-toggle-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hab-mobile-toggle.is-open .hab-toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hab-mobile-toggle.is-open .hab-toggle-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* --------------------------------------------------------------------------
+   Mobile Drawer Menu
+   -------------------------------------------------------------------------- */
+.hab-mobile-drawer {
+  display: none;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 0 2rem;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), padding 0.35s ease;
+}
+
+.hab-mobile-drawer.drawer-active {
+  max-height: 400px;
+  padding: 1.5rem 2rem 2rem;
+}
+
+.hab-mobile-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.hab-mobile-link {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #121316;
+  text-decoration: none;
+  padding: 4px 0;
+  display: inline-block;
+  transform-origin: left center;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.2s;
+}
+
+.hab-mobile-link:hover {
+  color: #000000;
+  transform: scale(1.08) translateX(6px);
+}
+
+.hab-mobile-talk-btn {
+  display: inline-block;
+  text-align: center;
+  background-color: #121316;
+  color: #ffffff;
+  padding: 0.85rem 1.5rem;
+  border-radius: 9999px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  margin-top: 0.5rem;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s;
+}
+
+.hab-mobile-talk-btn:hover {
+  transform: scale(1.05);
+  background-color: #1f2229;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Breakpoints
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .hab-header-container {
+    padding: 0.9rem 2rem;
+  }
+
+  .hab-nav {
+    display: none;
+  }
+
+  .hab-mobile-toggle {
+    display: flex;
+  }
+
+  .hab-mobile-drawer {
+    display: block;
+  }
+
+  .hab-talk-btn,
+  .hab-talk-btn-group {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .hab-header-container {
+    padding: 0.75rem 1.25rem;
+  }
+
+  .hab-logo {
+    height: 42px;
+  }
+}
